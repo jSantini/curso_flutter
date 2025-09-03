@@ -8,6 +8,7 @@ void main() {
 
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
+  var _totalPoints = 0;
 
   final List<Map<String, Object>> _perguntas = const [
     {
@@ -39,12 +40,12 @@ class _PerguntaAppState extends State<PerguntaApp> {
     },
   ];
 
-  void _responder() {
+  void _responder(int points) {
     if (hasQuestionSelected) {
       setState(() {
         _perguntaSelecionada++;
+        _totalPoints += points;
       });
-      print(_perguntaSelecionada);
     }
   }
 

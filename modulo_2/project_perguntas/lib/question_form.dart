@@ -5,7 +5,7 @@ import './response.dart';
 class QuestionForm extends StatelessWidget {
   final List<Map<String, Object>> questions;
   final int questionSelected;
-  final void Function() toAnswer;
+  final void Function(int) toAnswer;
 
   const QuestionForm({
     required this.questions,
@@ -24,7 +24,12 @@ class QuestionForm extends StatelessWidget {
         : [];
 
     List<Widget> widgets = answers
-        .map((t) => Response(t['text'] as String, toAnswer))
+        .map(
+          (t) => Response(
+            t['text'] as String,
+            () => toAnswer(int.parse(t['points'].toString())),
+          ),
+        )
         .toList();
 
     return Column(
