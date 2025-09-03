@@ -4,11 +4,15 @@ void main() {
   runApp(const PerguntaApp());
 }
 
-class PerguntaApp extends StatelessWidget {
-  const PerguntaApp({super.key});
+class _PerguntaAppState extends State<PerguntaApp> {
+  var _perguntaSelecionada = 0;
 
-  void responder() {
-    print('Pergunta respondida!');
+  void _responder() {
+    setState(() {
+      _perguntaSelecionada++;
+    });
+
+    print(_perguntaSelecionada);
   }
 
   @override
@@ -23,24 +27,50 @@ class PerguntaApp extends StatelessWidget {
         appBar: AppBar(title: const Text('Perguntas')),
         body: Column(
           children: [
-            Text(perguntas[0]),
+            Text(perguntas[_perguntaSelecionada]),
             ElevatedButton(
-              onPressed: responder,
+              onPressed: _responder,
               child: const Text('Resposta 1'),
             ),
             ElevatedButton(
-              onPressed: () {
-                print('Resposta 2 foi selecionada!');
-              },
+              onPressed: _responder,
               child: const Text('Resposta 2'),
             ),
             ElevatedButton(
-              onPressed: () => print('Resposta 3!!!'),
+              onPressed: _responder,
               child: const Text('Resposta 3'),
             ),
+
+            // ElevatedButton(
+            //   onPressed: responder, // PASSANDO UMA FUNÇAO NOMEADA DA CLASSE
+            //   child: const Text('Resposta 1'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     print(
+            //       'Resposta 2 foi selecionada!',
+            //     ); // CRIANDO E PASSANDO UMA FUNÇAO LOCAL
+            //   },
+            //   child: const Text('Resposta 2'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () => print(
+            //     'Resposta 3!!!',
+            //   ), // OUTRA FORMA DE CRIAR E PASSAR UMA FUNÇAO LOCAL
+            //   child: const Text('Resposta 3'),
+            // ),
           ],
         ),
       ),
     );
+  }
+}
+
+class PerguntaApp extends StatefulWidget {
+  const PerguntaApp({super.key});
+
+  @override
+  _PerguntaAppState createState() {
+    return _PerguntaAppState();
   }
 }
