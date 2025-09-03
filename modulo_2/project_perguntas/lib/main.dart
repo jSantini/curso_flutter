@@ -64,7 +64,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
                 questionSelected: _perguntaSelecionada,
                 toAnswer: _responder,
               )
-            : Result(),
+            : Result(_totalPoints),
       ),
     );
   }
