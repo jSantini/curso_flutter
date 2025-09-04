@@ -5,14 +5,31 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 void main() {
-  runApp(const ExpensesApp());
+  runApp(ExpensesApp());
 }
 
 class ExpensesApp extends StatelessWidget {
-  const ExpensesApp({Key? key}) : super(key: key);
+  ExpensesApp({Key? key}) : super(key: key);
+
+  final ThemeData tema = ThemeData();
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: MyHomePage());
+    return MaterialApp(
+      home: const MyHomePage(),
+      theme: ThemeData(
+        useMaterial3: false,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.purple,
+          foregroundColor: Colors.white,
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.amber,
+          primary: Colors.purple,
+          secondary: Colors.amber,
+        ),
+      ),
+    );
   }
 }
 
