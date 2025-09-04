@@ -37,7 +37,7 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+        children: <Widget>[
           Container(
             child: Card(
               elevation: 5,
@@ -45,7 +45,11 @@ class MyHomePage extends StatelessWidget {
               child: Text('Gráfico'),
             ),
           ),
-          Card(child: Text('Lista de Transações')),
+          Column(
+            children: _transactions.map((tr) {
+              return Card(child: Text(tr.title));
+            }).toList(),
+          ),
         ],
       ),
     );
