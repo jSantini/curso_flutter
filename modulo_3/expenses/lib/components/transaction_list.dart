@@ -11,8 +11,10 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.7,
+      height: mediaQuery.size.height * 0.7,
       child: transactions.isEmpty
           ? LayoutBuilder(
               builder: (ctx, constraints) {
@@ -56,7 +58,7 @@ class TransactionList extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       subtitle: Text(DateFormat('d MMM y').format(tr.date)),
-                      trailing: MediaQuery.of(context).size.width > 500
+                      trailing: mediaQuery.size.width > 500
                           ? TextButton(
                               onPressed: () => onRemove(tr.id),
                               child: Row(
