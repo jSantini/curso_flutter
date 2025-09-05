@@ -16,6 +16,8 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return MaterialApp(
       home: const MyHomePage(),
       theme: ThemeData(
@@ -58,6 +60,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _transactions = [];
+
+  bool _showChart = false;
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
@@ -125,14 +129,31 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: availableHeight * 0.3,
-              child: Chart(_recentTransactions),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Exibir Gráfico'),
+                Switch(
+                  value: _showChart,
+                  onChanged: (value) {
+                    setState(() {
+                      _showChart = value;
+                    });
+                  },
+                ),
+              ],
             ),
-            SizedBox(
-              height: availableHeight * 0.7,
-              child: TransactionList(_transactions, _removeTransaction),
-            ),
+
+            if (_showChart)
+              SizedBox(
+                height: availableHeight * 0.3,
+                child: Chart(_recentTransactions),
+              ),
+            if (!_showChart)
+              SizedBox(
+                height: availableHeight * 0.7,
+                child: TransactionList(_transactions, _removeTransaction),
+              ),
           ],
         ),
       ),
