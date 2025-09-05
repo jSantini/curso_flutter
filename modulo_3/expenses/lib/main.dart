@@ -10,31 +10,33 @@ void main() {
 }
 
 class ExpensesApp extends StatelessWidget {
-  ExpensesApp({Key? key}) : super(key: key);
+  ExpensesApp({super.key});
 
-  final ThemeData tema = ThemeData();
+  final ThemeData myTheme = ThemeData();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: const MyHomePage(),
       theme: ThemeData(
-        useMaterial3: false,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.purple,
-          foregroundColor: Colors.white,
-          titleTextStyle: TextStyle(
-            fontFamily: 'OpenSans',
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.amber,
-          primary: Colors.purple,
+        // Use a cor de semente (seed color) para gerar o esquema de cores.
+        // O Material Design 3 usa essa semente para criar todo o ColorScheme.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple).copyWith(
+          // Sobrescreve a cor secundária gerada para garantir que ela seja âmbar.
           secondary: Colors.amber,
         ),
-        fontFamily: 'Quicksand',
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.purple, // Força o background roxo.
+          foregroundColor: Colors.white, // Define a cor do texto e dos ícones.
+        ),
+        textTheme: myTheme.textTheme.copyWith(
+          titleLarge: const TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
       ),
     );
   }
@@ -103,14 +105,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Despesas Pessoais 3',
-          style: TextStyle(fontFamily: 'OpenSans'),
-        ),
+        title: const Text('Despesas Pessoais'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.add),
             onPressed: () => _openTransactionFormModal(context),
-            icon: Icon(Icons.add),
           ),
         ],
       ),
