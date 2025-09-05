@@ -35,23 +35,28 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 final tr = transactions[index];
 
-                return ListTile(
-                  leading: CircleAvatar(
-                    radius: 30,
-                    child: Padding(
-                      padding: const EdgeInsets.all(6),
-                      child: FittedBox(child: Text('R\$ ${tr.value}')),
+                return Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Card(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: FittedBox(child: Text('R\$ ${tr.value}')),
+                        ),
+                      ),
+                      title: Text(
+                        tr.title,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      subtitle: Text(DateFormat('d MMM y').format(tr.date)),
+                      trailing: IconButton(
+                        onPressed: () => onRemove(tr.id),
+                        icon: Icon(Icons.delete),
+                        color: Theme.of(context).colorScheme.error,
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    tr.title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  subtitle: Text(DateFormat('d MMM y').format(tr.date)),
-                  trailing: IconButton(
-                    onPressed: () => onRemove(tr.id),
-                    icon: Icon(Icons.delete),
-                    color: Theme.of(context).colorScheme.error,
                   ),
                 );
               },
