@@ -1,3 +1,4 @@
+import 'package:expenses/components/chart_bar.dart';
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -31,14 +32,14 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    groupedTransactions;
-    return const Card(
+    return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(children: [
-        
-      ],
-    ),
+      child: Row(
+        children: groupedTransactions.map((tr) {
+          return ChartBar(tr["day"], tr['value'], 0);
+        }).toList(),
+      ),
     );
   }
 }
