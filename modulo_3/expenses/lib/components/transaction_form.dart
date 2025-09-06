@@ -103,7 +103,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 children: [
                   AdaptativeButton(
                     label: 'Nova Transação',
-                    onPressed: _submitForm(),
+                    onPressed: _submitForm,
                   ),
                 ],
               ),
